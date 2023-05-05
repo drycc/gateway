@@ -13,5 +13,5 @@ spec:
     name: drycc-issuer
   privateKey:
     rotationPolicy: Always
-  secretName: drycc-issuer-secret
+  secretName: drycc-auto-tls
 {{- end }}

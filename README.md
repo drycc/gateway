@@ -1,4 +1,4 @@
-# Gateway
+# Drycc Gateway
 
 [![Build Status](https://woodpecker.drycc.cc/api/badges/drycc/gateway/status.svg)](https://woodpecker.drycc.cc/drycc/gateway)
 

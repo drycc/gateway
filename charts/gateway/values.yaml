@@ -1,5 +1,3 @@
-
-
 # acme configuration takes effect if and only if certManagerEnabled is true
 acme:
   server: https://acme-v02.api.letsencrypt.org/directory

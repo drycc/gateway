@@ -3,7 +3,7 @@ kind: Gateway
 metadata:
   name: drycc-gateway
 spec:
-  gatewayClassName: {{ .Values.gatewayClass }}
+  gatewayClassName: {{ .Values.global.gatewayClass }}
   listeners:
   - name: drycc-gateway-listener-http
     port: 80
@@ -19,7 +19,7 @@ spec:
       certificateRefs:
       - group: ""
         kind: Secret
-        name: drycc-issuer
+        name: drycc-auto-tls
       mode: Terminate
     allowedRoutes:
       namespaces:
