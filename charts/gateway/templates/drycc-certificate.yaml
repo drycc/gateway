@@ -1,0 +1,17 @@
+{{- if .Values.global.certManagerEnabled}}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: drycc-certificate
+spec:
+  dnsNames:
+  {{- range .Values.domainPrefixs }}
+  - {{printf "%s.%s" . $.Values.global.platformDomain}}
+  {{- end }}
+  issuerRef:
+    kind: Issuer
+    name: drycc-issuer
+  privateKey:
+    rotationPolicy: Always
+  secretName: drycc-issuer-secret
+{{- end }}

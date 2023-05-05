@@ -1,0 +1,8 @@
+apiVersion: v2
+description: Drycc Gateway
+home: https://github.com/drycc/gateway
+maintainers:
+- email: team@drycc.cc
+  name: Team Drycc
+name: gateway
+version: v1.0.0

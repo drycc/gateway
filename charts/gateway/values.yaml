@@ -1,0 +1,28 @@
+
+
+# acme configuration takes effect if and only if certManagerEnabled is true
+acme:
+  server: https://acme-v02.api.letsencrypt.org/directory
+  #  EAB credentials
+  externalAccountBinding:
+    keyID: ""
+    keySecret: ""
+# This will be the hostname prefix that is used to build endpoints
+domainPrefixs:
+- drycc
+- drycc-rabbitmq
+- drycc-passport
+- drycc-influxdb
+- drycc-prometheus
+- drycc-monitor-grafana
+
+global:
+  # Admin email, used for each component to send email to administrator
+  email: "drycc@drycc.cc"
+  gatewayClass: ""
+  # The publicly resolvable hostname to build your cluster with.
+  #
+  # This will be the hostname that is used to build endpoints such as "drycc.$HOSTNAME"
+  platformDomain: ""
+  # Whether certManagerEnabled is true to automatically generate drycc certificates
+  certManagerEnabled: true

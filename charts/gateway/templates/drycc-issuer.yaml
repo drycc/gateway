@@ -1,0 +1,31 @@
+{{- if .Values.global.certManagerEnabled}}
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: drycc-issuer
+spec:
+  acme:
+    # Email address used for ACME registration
+    email: "{{ .Values.global.email }}"
+    # The ACME server URL
+    server: "{{ .Values.acme.server }}"
+    {{ if and (not (empty .Values.acme.externalAccountBinding.keyID)) (not (empty .Values.acme.externalAccountBinding.keySecret)) }}
+    externalAccountBinding:
+      keyID: {{ .Values.acme.externalAccountBinding.keyID }}
+      keySecretRef:
+        name: drycc-issuer-secret
+        key: secret
+    {{ end }}
+    # Name of a secret used to store the ACME account private key
+    privateKeySecretRef:
+      name: drycc-issuer
+    # Enable HTTP01 validations
+    # http01: {}
+    solvers:
+    - http01:
+      gatewayHTTPRoute:
+        parentRefs:
+        - group: gateway.networking.k8s.io
+          kind: Gateway
+          name: drycc-gateway
+{{- end }}
