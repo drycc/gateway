@@ -14,6 +14,9 @@ domainPrefixs:
 - drycc-prometheus
 - drycc-monitor-grafana
 
+# custom listeners
+customListeners: []
+
 global:
   # Admin email, used for each component to send email to administrator
   email: "drycc@drycc.cc"

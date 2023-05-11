@@ -25,3 +25,4 @@ spec:
       namespaces:
         from: All
   {{- end }}
+  {{- with .Values.customListeners }}{{- toYaml . | nindent 2 }}{{- end }}
