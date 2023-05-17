@@ -23,9 +23,9 @@ spec:
     # http01: {}
     solvers:
     - http01:
-      gatewayHTTPRoute:
-        parentRefs:
-        - group: gateway.networking.k8s.io
-          kind: Gateway
-          name: drycc-gateway
+        gatewayHTTPRoute:
+          parentRefs:
+          - group: gateway.networking.k8s.io
+            kind: Gateway
+            name: drycc-gateway
 {{- end }}
