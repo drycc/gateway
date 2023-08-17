@@ -5,14 +5,14 @@ metadata:
 spec:
   gatewayClassName: {{ .Values.global.gatewayClass }}
   listeners:
-  - name: drycc-gateway-listener-http
+  - name: http
     port: 80
     protocol: HTTP
     allowedRoutes:
       namespaces:
         from: All
   {{- if .Values.global.certManagerEnabled}}
-  - name: drycc-gateway-listener-https
+  - name: https
     port: 443
     protocol: HTTPS
     tls:
