@@ -5,8 +5,10 @@ metadata:
   name: drycc-certificate
 spec:
   dnsNames:
-  {{- range .Values.domainPrefixs }}
-  - {{printf "%s.%s" . $.Values.global.platformDomain}}
+  {{- range $app := .Values.apps }}
+  {{- if $app.hostname }}
+  - {{ tpl $app.hostname $ }}
+  {{- end }}
   {{- end }}
   issuerRef:
     kind: Issuer

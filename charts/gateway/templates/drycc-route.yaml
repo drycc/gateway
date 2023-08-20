@@ -1,0 +1,34 @@
+{{ range $index, $app := .Values.apps }}
+---
+apiVersion: gateway.networking.k8s.io/{{ if (eq $app.protocol "HTTP") }}v1beta1{{ else }}v1alpha2{{ end }}
+kind: {{ $app.protocol }}Route
+metadata:
+  name: {{ $app.name }}
+  labels:
+    app: {{ $app.name }}
+    chart: "{{ $.Chart.Name }}-{{ $.Chart.Version }}"
+    release: "{{ $.Release.Name }}"
+    heritage: "{{ $.Release.Service }}"
+spec:
+  {{- if $app.hostname }}
+  hostnames:
+  - {{ tpl $app.hostname $ }}
+  {{- end }}
+  parentRefs:
+  - group: gateway.networking.k8s.io
+    kind: Gateway
+    name: drycc-gateway
+    sectionName: {{ printf "%s-%v-%d" $app.protocol $app.port $index | lower }}
+ {{- if and (eq $app.protocol "HTTP") ($.Values.global.certManagerEnabled) }}
+  - group: gateway.networking.k8s.io
+    kind: Gateway
+    name: drycc-gateway
+    sectionName: {{ printf "%s-%v-%d" "https" $app.port $index | lower }}
+  {{- end }}
+  rules:
+  {{- range $service := $app.services }}
+  - backendRefs:
+    - name: {{ $service.name }}
+      port: {{ $service.port }}
+  {{- end }}
+{{- end }}

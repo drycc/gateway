@@ -5,15 +5,22 @@ metadata:
 spec:
   gatewayClassName: {{ .Values.global.gatewayClass }}
   listeners:
-  - name: http
-    port: 80
-    protocol: HTTP
+  {{- range $index, $app := .Values.apps }}
+  - name: {{ printf "%s-%v-%d" $app.protocol $app.port $index | lower }}
+    port: {{ $app.port }}
+    {{- if $app.hostname }}
+    hostname: {{ tpl $app.hostname $ }}
+    {{- end }}
+    protocol: {{ $app.protocol }}
     allowedRoutes:
       namespaces:
         from: All
-  {{- if .Values.global.certManagerEnabled}}
-  - name: https
+  {{- if and (eq $app.protocol "HTTP") ($.Values.global.certManagerEnabled) }}
+  - name: {{ printf "%s-%v-%d" "https" $app.port $index | lower }}
     port: 443
+    {{- if $app.hostname }}
+    hostname: {{ tpl $app.hostname $ }}
+    {{- end }}
     protocol: HTTPS
     tls:
       certificateRefs:
@@ -25,4 +32,4 @@ spec:
       namespaces:
         from: All
   {{- end }}
-  {{- with .Values.customListeners }}{{- toYaml . | nindent 2 }}{{- end }}
+  {{- end }}
