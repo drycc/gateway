@@ -1,6 +1,6 @@
 {{ range $index, $app := .Values.apps }}
 ---
-apiVersion: gateway.networking.k8s.io/{{ if (eq $app.protocol "HTTP") }}v1beta1{{ else }}v1alpha2{{ end }}
+apiVersion: gateway.networking.k8s.io/{{ if (eq $app.protocol "HTTP") }}v1{{ else }}v1alpha2{{ end }}
 kind: {{ $app.protocol }}Route
 metadata:
   name: {{ $app.name }}
