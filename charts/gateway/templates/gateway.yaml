@@ -4,7 +4,7 @@ metadata:
   name: drycc-gateway
   {{- if .Values.global.certManagerEnabled}}
   annotations:
-    cert-manager.io/issuer: drycc-issuer
+    cert-manager.io/issuer: gateway-issuer
   {{- end }}
 spec:
   gatewayClassName: {{ .Values.global.gatewayClass }}
@@ -30,7 +30,7 @@ spec:
       certificateRefs:
       - group: ""
         kind: Secret
-        name: drycc-auto-tls
+        name: gateway-auto-tls
       mode: Terminate
     allowedRoutes:
       namespaces:

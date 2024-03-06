@@ -12,8 +12,8 @@ spec:
   {{- end }}
   issuerRef:
     kind: Issuer
-    name: drycc-issuer
+    name: gateway-issuer
   privateKey:
     rotationPolicy: Always
-  secretName: drycc-auto-tls
+  secretName: gateway-auto-tls
 {{- end }}
