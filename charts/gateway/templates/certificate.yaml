@@ -2,7 +2,7 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: drycc-certificate
+  name: drycc-auto-tls
 spec:
   dnsNames:
   {{- range $app := .Values.apps }}
@@ -12,8 +12,8 @@ spec:
   {{- end }}
   issuerRef:
     kind: Issuer
-    name: gateway-issuer
+    name: drycc-issuer
   privateKey:
     rotationPolicy: Always
-  secretName: gateway-auto-tls
+  secretName: drycc-auto-tls
 {{- end }}

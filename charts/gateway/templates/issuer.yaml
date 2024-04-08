@@ -2,7 +2,7 @@
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: gateway-issuer
+  name: drycc-issuer
 spec:
   acme:
     # Email address used for ACME registration
@@ -13,12 +13,12 @@ spec:
     externalAccountBinding:
       keyID: {{ .Values.acme.externalAccountBinding.keyID }}
       keySecretRef:
-        name: gateway-issuer-secret
+        name: drycc-issuer-secret
         key: secret
     {{ end }}
     # Name of a secret used to store the ACME account private key
     privateKeySecretRef:
-      name: gateway-issuer
+      name: drycc-issuer
     # Enable HTTP01 validations
     # http01: {}
     solvers:
