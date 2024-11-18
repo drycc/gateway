@@ -27,6 +27,13 @@ apps:
     services:
     - name: drycc-rabbitmq
       port: 15672
+  - name: drycc-grafana
+    port: 80
+    hostname: drycc-grafana.{{ .Values.global.platformDomain }}
+    protocol: HTTP
+    services:
+    - name: drycc-grafana
+      port: 80
   - name: drycc-passport
     port: 80
     hostname: drycc-passport.{{ .Values.global.platformDomain }}
@@ -41,13 +48,6 @@ apps:
     services:
     - name: drycc-prometheus
       port: 9090
-  - name: drycc-monitor-grafana
-    port: 80
-    hostname: drycc-monitor-grafana.{{ .Values.global.platformDomain }}
-    protocol: HTTP
-    services:
-    - name: drycc-monitor-grafana
-      port: 80
 
 global:
   # Admin email, used for each component to send email to administrator
