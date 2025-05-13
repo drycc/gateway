@@ -1,3 +1,7 @@
+
+# GatewayClass is cluster-scoped resource defined by the infrastructure provider.
+gatewayClass: ""
+
 # acme configuration takes effect if and only if certManagerEnabled is true
 acme:
   server: https://acme-v02.api.letsencrypt.org/directory
@@ -59,7 +63,6 @@ apps:
 global:
   # Admin email, used for each component to send email to administrator
   email: "drycc@drycc.cc"
-  gatewayClass: ""
   # The publicly resolvable hostname to build your cluster with.
   #
   # This will be the hostname that is used to build endpoints such as "drycc.$HOSTNAME"
