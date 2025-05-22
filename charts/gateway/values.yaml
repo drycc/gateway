@@ -52,13 +52,6 @@ apps:
     services:
     - name: drycc-passport
       port: 80
-  - name: drycc-prometheus
-    port: 80
-    hostname: drycc-prometheus.{{ .Values.global.platformDomain }}
-    protocol: HTTP
-    services:
-    - name: drycc-prometheus
-      port: 9090
 
 global:
   # Admin email, used for each component to send email to administrator
