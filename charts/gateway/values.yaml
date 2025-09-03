@@ -31,13 +31,6 @@ apps:
     services:
     - name: drycc-rabbitmq
       port: 15672
-  - name: drycc-storage
-    port: 80
-    hostname: drycc-storage.{{ .Values.global.platformDomain }}
-    protocol: HTTP
-    services:
-    - name: drycc-storage
-      port: 9001
   - name: drycc-grafana
     port: 80
     hostname: drycc-grafana.{{ .Values.global.platformDomain }}
@@ -52,6 +45,20 @@ apps:
     services:
     - name: drycc-passport
       port: 80
+  - name: drycc-storage
+    port: 80
+    hostname: drycc-storage.{{ .Values.global.platformDomain }}
+    protocol: HTTP
+    services:
+    - name: drycc-storage
+      port: 9000
+  - name: drycc-storage-console
+    port: 80
+    hostname: drycc-storage-console.{{ .Values.global.platformDomain }}
+    protocol: HTTP
+    services:
+    - name: drycc-storage
+      port: 9001
 
 global:
   # Admin email, used for each component to send email to administrator
