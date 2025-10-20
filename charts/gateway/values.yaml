@@ -24,13 +24,6 @@ apps:
     services:
     - name: drycc-controller-api
       port: 80
-  - name: drycc-rabbitmq
-    port: 80
-    hostname: drycc-rabbitmq.{{ .Values.global.platformDomain }}
-    protocol: HTTP
-    services:
-    - name: drycc-rabbitmq
-      port: 15672
   - name: drycc-grafana
     port: 80
     hostname: drycc-grafana.{{ .Values.global.platformDomain }}
