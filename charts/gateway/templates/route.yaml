@@ -15,15 +15,22 @@ spec:
   - {{ tpl $app.hostname $ }}
   {{- end }}
   parentRefs:
+  {{- if not (eq $app.protocol "HTTP") }}
   - group: gateway.networking.k8s.io
     kind: Gateway
     name: drycc-gateway
-    sectionName: {{ printf "%s-%v-%d" $app.protocol $app.port $index | lower }}
- {{- if and (eq $app.protocol "HTTP") ($.Values.global.certManagerEnabled) }}
+    sectionName: {{ printf "%s-%v" $app.protocol $app.port | lower }}
+  {{- else }}
   - group: gateway.networking.k8s.io
-    kind: Gateway
-    name: drycc-gateway
-    sectionName: {{ printf "%s-%v-%d" "https" $app.port $index | lower }}
+    kind: ListenerSet
+    name: drycc-listenerset
+    sectionName: {{ printf "http-80-%s" $app.name | lower }}
+  {{- if $.Values.global.certManagerEnabled }}
+  - group: gateway.networking.k8s.io
+    kind: ListenerSet
+    name: drycc-listenerset
+    sectionName: {{ printf "https-443-%s" $app.name | lower }}
+  {{- end}}
   {{- end }}
   rules:
   {{- range $service := $app.services }}
